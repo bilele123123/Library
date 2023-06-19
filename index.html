@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" href="assets/libraryicon.png">
+    <title>Library</title>
+</head>
+
+<body>
+    <div class="library-container">
+        <div class="library-header">
+            <h1>LIBRARY</h1>
+        </div>
+
+        <div class="library-content">
+            <button class="content-addBTN">+ Add Book</button>
+        </div>
+
+        <div class="bookPopup">
+            <form id="add-book">
+                <input type="text" id="titleInput" placeholder="Title" required>
+                <input type="text" id="authorInput" placeholder="Author" required>
+                <input type="number" id="pageInput" placeholder="Pages" required>
+                <label for="readInput">Read</label>
+                <input type="checkbox" id="readInput">
+                <button type="submit">Add</button>
+            </form>
+        </div>
+
+    </div>
+</body>
+<script defer src="app.js"></script>
+</html>
