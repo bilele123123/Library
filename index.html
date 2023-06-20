@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -14,22 +15,27 @@
             <h1>LIBRARY</h1>
         </div>
 
-        <div class="library-content">
-            <button class="content-addBTN">+ Add Book</button>
+        <div class="book-list">
         </div>
 
-        <div class="bookPopup">
-            <form id="add-book">
+        <div class="book-popup">
+            <form id="add-book-form">
                 <input type="text" id="titleInput" placeholder="Title" required>
                 <input type="text" id="authorInput" placeholder="Author" required>
                 <input type="number" id="pageInput" placeholder="Pages" required>
-                <label for="readInput">Read</label>
-                <input type="checkbox" id="readInput">
-                <button type="submit">Add</button>
+                <div class="form-checkbox">
+                    <label for="readInput" id="labelInput">Completed Reading?</label>
+                    <input type="checkbox" id="readInput">
+                </div>
+                <button type="submit" id="book-submitBTN">Add</button>
             </form>
         </div>
 
+        <div class="add-book-btn">
+            <button class="content-addBTN">+ Add Book</button>
+        </div>
     </div>
+    <script defer src="app.js"></script>
 </body>
-<script defer src="app.js"></script>
+
 </html>
