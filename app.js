@@ -50,6 +50,7 @@ function addBookToLibrary(event) {
     displayBook();
 }
 
+
 function displayBook() {
     bookList.innerHTML = "";
 
@@ -79,7 +80,7 @@ function displayBook() {
         editBTN.textContent = "Edit";
         editBTN.classList.add("edit-bookBTN");
         editBTN.addEventListener("click", () => editBook(index));
-            
+
         const removeBTN = document.createElement("button");
         removeBTN.textContent = "Remove";
         removeBTN.classList.add("remove-bookBTN");
@@ -102,57 +103,59 @@ function removeBook(index) {
 
 function editBook(index) {
     const book = myLibrary[index];
-  
+
     const titleInput = document.getElementById("titleInput");
     const authorInput = document.getElementById("authorInput");
     const pageInput = document.getElementById("pageInput");
     const readInput = document.getElementById("readInput");
-  
+
     titleInput.value = book.title;
     authorInput.value = book.author;
     pageInput.value = book.pages;
     readInput.checked = book.hasRead;
-  
-    if (bookPopup.style.display === "none") {
-      bookPopup.style.display = "block";
-    }
-  
-    addBookForm.removeEventListener("submit", addBookToLibrary);
-    addBookForm.addEventListener("submit", () => updateBook(event, index));
-  }
 
-  function updateBook(event, index) {
+    bookPopup.style.display = "block";
+
+    addBookForm.removeEventListener("submit", addBookToLibrary);
+    addBookForm.addEventListener("submit", (event) => updateBook(event, index));
+}
+
+function updateBook(event, index) {
     event.preventDefault();
-  
+
     const titleInput = document.getElementById("titleInput");
     const authorInput = document.getElementById("authorInput");
     const pageInput = document.getElementById("pageInput");
     const readInput = document.getElementById("readInput");
-  
-    myLibrary[index].title = titleInput.value;
-    myLibrary[index].author = authorInput.value;
-    myLibrary[index].pages = pageInput.value;
-    myLibrary[index].hasRead = readInput.checked;
-  
+
+    const updatedTitle = titleInput.value;
+    const updatedAuthor = authorInput.value;
+    const updatedPages = pageInput.value;
+    const updatedHasRead = readInput.checked;
+
+    myLibrary[index].title = updatedTitle;
+    myLibrary[index].author = updatedAuthor;
+    myLibrary[index].pages = updatedPages;
+    myLibrary[index].hasRead = updatedHasRead;
+
     titleInput.value = "";
     authorInput.value = "";
     pageInput.value = "";
     readInput.checked = false;
-  
+
     bookPopup.style.display = "none";
-  
+
     addBookForm.removeEventListener("submit", updateBook);
     addBookForm.addEventListener("submit", addBookToLibrary);
-  
+
     displayBook();
-  }
-  
-  
+}
+
+
 function toggleReadStatus(index) {
     myLibrary[index].hasRead = !myLibrary[index].hasRead;
     displayBook();
     const statusBTN = document.querySelectorAll(".status-button");
     statusBTN[index].textContent = myLibrary[index].hasRead ? "Complete" : "Incomplete";
     statusBTN[index].style.backgroundColor = myLibrary[index].hasRead ? "lightgreen" : "lightcoral";
-  }
-  
+}
