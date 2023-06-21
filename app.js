@@ -74,6 +74,11 @@ function displayBook() {
         statusBTN.classList.add("status-button");
         statusBTN.classList.add(book.hasRead ? "complete" : "incomplete");
         statusBTN.addEventListener("click", () => toggleReadStatus(index));
+
+        const editBTN = document.createElement("button");
+        editBTN.textContent = "Edit";
+        editBTN.classList.add("edit-bookBTN");
+        editBTN.addEventListener("click", () => editBook(index));
             
         const removeBTN = document.createElement("button");
         removeBTN.textContent = "Remove";
@@ -84,6 +89,7 @@ function displayBook() {
         bookInfo.appendChild(bookAuthor);
         bookInfo.appendChild(bookPages);
         bookInfo.appendChild(statusBTN);
+        bookInfo.appendChild(editBTN);
         bookInfo.appendChild(removeBTN);
         bookList.appendChild(bookInfo);
     });
@@ -94,6 +100,54 @@ function removeBook(index) {
     displayBook();
 }
 
+function editBook(index) {
+    const book = myLibrary[index];
+  
+    const titleInput = document.getElementById("titleInput");
+    const authorInput = document.getElementById("authorInput");
+    const pageInput = document.getElementById("pageInput");
+    const readInput = document.getElementById("readInput");
+  
+    titleInput.value = book.title;
+    authorInput.value = book.author;
+    pageInput.value = book.pages;
+    readInput.checked = book.hasRead;
+  
+    if (bookPopup.style.display === "none") {
+      bookPopup.style.display = "block";
+    }
+  
+    addBookForm.removeEventListener("submit", addBookToLibrary);
+    addBookForm.addEventListener("submit", () => updateBook(event, index));
+  }
+
+  function updateBook(event, index) {
+    event.preventDefault();
+  
+    const titleInput = document.getElementById("titleInput");
+    const authorInput = document.getElementById("authorInput");
+    const pageInput = document.getElementById("pageInput");
+    const readInput = document.getElementById("readInput");
+  
+    myLibrary[index].title = titleInput.value;
+    myLibrary[index].author = authorInput.value;
+    myLibrary[index].pages = pageInput.value;
+    myLibrary[index].hasRead = readInput.checked;
+  
+    titleInput.value = "";
+    authorInput.value = "";
+    pageInput.value = "";
+    readInput.checked = false;
+  
+    bookPopup.style.display = "none";
+  
+    addBookForm.removeEventListener("submit", updateBook);
+    addBookForm.addEventListener("submit", addBookToLibrary);
+  
+    displayBook();
+  }
+  
+  
 function toggleReadStatus(index) {
     myLibrary[index].hasRead = !myLibrary[index].hasRead;
     displayBook();
